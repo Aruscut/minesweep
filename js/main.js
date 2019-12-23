@@ -9,7 +9,24 @@ const rowTemp = function(array) {
   return t
 }
 
+const squareTemp = function(array) {
+  var t = ``
+  var len = array.length
+  for (let i = 0; i < len; i++) {
+    let s = rowTemp(array[i])
+    t += s
+  }
+  return t
+}
+
 const insertTemp = function(t) {
-  var table = e('.tableRow')
-  table.insertAdjacentHTML('beforeend', t)
+  var table = e('.tableContainer')
+  table.innerHTML = t
+  //table.insertAdjacentHTML('beforeend', t)
+}
+
+const creatTable = function(n) {
+  var mine = creatMine(n)
+  var t = squareTemp(mine)
+  insertTemp(t)
 }
