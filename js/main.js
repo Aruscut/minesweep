@@ -56,5 +56,5 @@ var bindAll = function(selector, trigger, callback) {
   }
 }
 */
-
+//隐藏高度的方法，以及table标签
 main()
