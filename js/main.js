@@ -36,7 +36,8 @@ const bindClickAll= function() {
     target.classList.toggle('cover', false)
     var n = parseInt(target.dataset.value)
     if(n === 9) {
-      target.innerHTML = `<img src="image/bomb.jpg" alt="bomb">`
+      target.classList.toggle('boom', true)
+      //target.innerHTML = ' <img src="image/bomb.jpg" alt="bomb">'
     } else {
       target.innerHTML = n
     }
