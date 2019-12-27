@@ -64,5 +64,6 @@ const markMine = function(square) {
 const creatMine = function(n) {
   var square = randomSquare09(n)
   var mine = markMine(square)
+  log('creatMine', square)
   return mine
 }
