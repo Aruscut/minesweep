@@ -1,34 +1,3 @@
-const rowTemp = function(array, n) {
-  var len = array.length
-  var t = `<div class="tableRow">`
-  for (var i = 0; i < array.length; i++) {
-    var s = `<div class="tableCell cover" data-value=${array[i]} data-i=${n} data-j=${i}></div>`
-    t += s
-  }
-  t += `</div>`
-  return t
-}
-
-const squareTemp = function(array) {
-  var t = ``
-  var len = array.length
-  for (let i = 0; i < len; i++) {
-    let s = rowTemp(array[i], i)
-    t += s
-  }
-  return t
-}
-
-const insertTemp = function(t) {
-  var table = e('.tableContainer')
-  table.innerHTML = t
-}
-
-const creatTable = function(n) {
-  var mine = creatMine(n)
-  var t = squareTemp(mine)
-  insertTemp(t)
-}
 
 const changeClass = function(target, class1, class2='') {
   var bool = target.classList.contains(class1)
@@ -130,7 +99,7 @@ const open1 = function(square, i, j) {
       changeClass(cell, 'cover')
       cell.innerHTML = value
       if(value === '0') {
-        log('value', value, 'cover', cover)
+        //log('value', value, 'cover', cover)
         openAround(square, i, j)
         return null
       }
@@ -172,11 +141,44 @@ const testTable = function(n) {
   insertTemp(t)
 }
 
-const main = function() {
-  creatTable(10)
-  //testTable(10)
+const setRestart = function(n) {
+  let target = e('.restart')
+  target.dataset.row = String(n)
+}
+
+const bindButtons = function() {
+  bind('.junior', 'click', function() {
+    creatTable(6)
+    setRestart(6)
+  })//bindJunior
+  bind('.middle', 'click', function() {
+    creatTable(9)
+    setRestart(9)
+  })
+  bind('.master', 'click', function() {
+    creatTable(12)
+    setRestart(12)
+  })
+  bind('.restart', 'click', function(event) {
+    let target = event.target
+    let n = target.dataset.row
+    log('n', typeof n, n)
+    n = parseInt(n)
+    log('n', typeof n, n)
+    resetTable(n)
+  })
+}
+
+const resetTable = function(n) {
+  log('resetTable', n)
+  creatTable(n)
   bindLeftClick()
   bindRightClick()
+}
+
+const main = function() {
+  resetTable(9)
+  bindButtons()
 }
 
 /*

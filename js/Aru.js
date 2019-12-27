@@ -23,7 +23,7 @@ var e = function(input){
 }
 
 var eAll = function(input){
-  log('eAll', document.querySelectorAll(input))
+  //log('eAll', document.querySelectorAll(input))
   return document.querySelectorAll(input)
 }
 
