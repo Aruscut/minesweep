@@ -28,6 +28,7 @@ const bindLeftClick = function() {
     var flag = target.classList.contains('flag')
     if(n === 9) {
       changeClass(target, 'cover', 'boom')
+      showBomb()
       //target.innerHTML = ' <img src="image/bomb.jpg" alt="bomb">'
     } else {
       changeClass(target, 'cover')
@@ -63,6 +64,28 @@ const bindRightClick = function() {
   })
 }
 
+//掀开bomb模块
+const showBomb = function() {
+  var cells = tableCells()
+  var len = cells.length
+  var bombs = []
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len; j++) {
+      var cell = cells[i][j]
+      if (cell.dataset.value === '9') {
+        bombs.push(cell)
+        //cell.classList.value = 'tableCell boom'
+      }
+    }
+  }
+  for (let i = 0; i < bombs.length; i++) {
+    setTimeout(function(){
+      bombs[i].classList.value = 'tableCell boom'
+      log('bombs[i] = ', bombs[i])
+    }, 1000)
+  }
+}
+
 //点零扩散功能
 /*1.去除特定cover的函数
 2.去除后扩散功能
@@ -71,7 +94,7 @@ const tableCells = function() {
   var all = eAll('.tableCell')
   var len = all.length
   var n = Math.sqrt(len)
-  log('allCell.n = ', n)
+  //log('allCell.n = ', n)
   var row = []
   var square = []
   for (let i = 0; i < len; i++) {
@@ -145,18 +168,19 @@ const setRestart = function(n) {
   let target = e('.restart')
   target.dataset.row = String(n)
 }
+//设置restart的dataset
 
 const bindButtons = function() {
   bind('.junior', 'click', function() {
-    creatTable(6)
+    resetTable(6)
     setRestart(6)
   })//bindJunior
   bind('.middle', 'click', function() {
-    creatTable(9)
+    resetTable(9)
     setRestart(9)
   })
   bind('.master', 'click', function() {
-    creatTable(12)
+    resetTable(12)
     setRestart(12)
   })
   bind('.restart', 'click', function(event) {
