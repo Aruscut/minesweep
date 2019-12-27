@@ -153,9 +153,24 @@ const spread = function(target) {
   var cells = tableCells()
   openAround(cells, i, j)
 }
+//最终成果spread()
+
+//test
+const testMine = function(n) {
+  var square = randomSquare09(n)
+  log('creatMine', square)
+  return square
+}
+
+const testTable = function(n) {
+  var mine = testMine(n)
+  var t = squareTemp(mine)
+  insertTemp(t)
+}
 
 const main = function() {
-  creatTable(10)
+  //creatTable(10)
+  testTable(10)
   bindLeftClick()
   bindRightClick()
 }
