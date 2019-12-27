@@ -64,6 +64,7 @@ const bindLeftClick = function() {
       changeClass(target, 'cover')
       if(flag == false)
       target.innerHTML = n
+      log('taget.classList', target.classList)
       if(n === 0) {
         spread(target)
       }
@@ -122,15 +123,18 @@ const open1 = function(square, i, j) {
     var value = cell.dataset.value
     var cover = cell.classList.contains('cover')
     var flag = cell.classList.contains('flag')
-    if(value === '9' || flag === true || cover === false) {
+    if(value === '9' || flag === true) {
       return null
     }
-    if(value === '0') {
-      openAround(square, i, j)
-      return null
+    if(cover === true) {
+      changeClass(cell, 'cover')
+      cell.innerHTML = value
+      if(value === '0') {
+        log('value', value, 'cover', cover)
+        openAround(square, i, j)
+        return null
+      }
     }
-    changeClass(cell, 'cover')
-    cell.innerHTML = value
   }
 }
 
@@ -169,8 +173,8 @@ const testTable = function(n) {
 }
 
 const main = function() {
-  //creatTable(10)
-  testTable(10)
+  creatTable(10)
+  //testTable(10)
   bindLeftClick()
   bindRightClick()
 }
