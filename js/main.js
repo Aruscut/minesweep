@@ -78,6 +78,7 @@ const showBomb = function() {
       }
     }
   }
+
   for (let i = 0; i < bombs.length; i++) {
     setTimeout(function(){
       bombs[i].classList.value = 'tableCell boom'
@@ -86,6 +87,21 @@ const showBomb = function() {
   }
 }
 
+//计时函数功能
+const timer = function(time, callback) {
+  var i = 0
+  var t = setInterval(callback(), time);
+  log('Timer END')
+}
+/*
+timer(1000, function(i) {
+  log('interval', i)
+  i++
+  if(i > 5) {
+    clearInterval(t)
+    log('interval END')
+  }
+})
 //点零扩散功能
 /*1.去除特定cover的函数
 2.去除后扩散功能
@@ -150,6 +166,7 @@ const spread = function(target) {
   openAround(cells, i, j)
 }
 //最终成果spread()
+//点零扩散功能end
 
 //test
 const testMine = function(n) {

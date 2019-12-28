@@ -2,7 +2,7 @@ var log = function(){
   console.log.apply(console , arguments)
 }
 
-var ajax = function(method, path, headers, data, responseCallback){
+var ajax = function(method, path, headers, data, response){
   var r = new XMLHttpRequest()
   // 设置请求方法和请求地址
   r.open(method, path, true)
