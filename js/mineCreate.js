@@ -28,6 +28,25 @@ const randomSquare09 = function(n) {
   }
   return square
 }
+
+const square0 = function(n) {
+  var row = []
+  var square = []
+  for (var i = 0; i < n; i++) {
+    row.push(0)
+  }
+  for (var i = 0; i < n; i++) {
+    square.push(row)
+  }
+  return square
+}
+//生成N*N的矩阵方块
+/*
+const randomSquare09 = function(n) {
+  var square = square0(n)
+  var all = n*n
+}
+*/
 //生成09方阵
 
 const plus1 = function(square, i, j) {
