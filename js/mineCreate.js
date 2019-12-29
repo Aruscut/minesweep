@@ -1,35 +1,7 @@
 /*
 写输出N*N扫雷方阵函数
 */
-const random09 = function(){
-  var x = Math.random()
-  x = 10*x
-  x = Math.floor(x)
-  x = x % 2
-  x = x * 9
-  //log('random09',x)
-  return x
-}
 
-const randomline09 = function(n) {
-  var line = []
-  for (var i = 0; i < n; i++) {
-    let x = random09()
-    line.push(x)
-  }
-  return line
-}
-
-/*
-const randomSquare09 = function(n) {
-  var square = []
-  for (let i = 0; i < n; i++) {
-    let line = randomline09(n)
-    square.push(line)
-  }
-  return square
-}
-*/
 const square0 = function(n) {
   var square = []
   var row = []
@@ -43,7 +15,6 @@ const square0 = function(n) {
   return square
 }
 //生成N*N的矩阵方块
-
 
 const randomSquare09 = function(n) {
   var square = square0(n)
