@@ -130,9 +130,8 @@ var classAddAll = function(target,classname) {
 var randomInt = function(n) {
   var x = Math.random()
   var j = n + 1
-  x = x * 10 * j
+  x = x * j
   x = Math.floor(x)
-  x = x % j
   //log('random0~n',x)
   return x
 }
@@ -142,18 +141,22 @@ var randomInt_test = function(n) {
   var chances =[]
   for (var i = 0; i < (n + 1); i++) {
     var k = 0
-    for (var j = 0; j < 100000; j++) {
+    for (var j = 0; j < 1000000; j++) {
       var x = randomInt(n)
       if( x === i){ k++ }
     }
-    var chance = k / 1000
+    var chance = k / 10000
     chances.push(chance)
   }
   log('chances', chances)
 }
 //测试randomInt
 
-
+const arrayCopy = function(array) {
+  var string = JSON.stringify(array)
+  var arrayNew = JSON.parse(string)
+  return arrayNew
+}
 /*
 数字在数列中平移问题的完美解决方案：
 对于0 ~ N 中的某数k，平移x位后的坐标是

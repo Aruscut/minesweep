@@ -20,6 +20,7 @@ const randomline09 = function(n) {
   return line
 }
 
+/*
 const randomSquare09 = function(n) {
   var square = []
   for (let i = 0; i < n; i++) {
@@ -28,25 +29,43 @@ const randomSquare09 = function(n) {
   }
   return square
 }
-
+*/
 const square0 = function(n) {
-  var row = []
   var square = []
+  var row = []
   for (var i = 0; i < n; i++) {
     row.push(0)
   }
   for (var i = 0; i < n; i++) {
-    square.push(row)
+    var array = arrayCopy(row)
+    square.push(array)
   }
   return square
 }
 //生成N*N的矩阵方块
-/*
+
+
 const randomSquare09 = function(n) {
   var square = square0(n)
-  var all = n*n
+  log('ranSquare0', square)
+  var all = n * n
+  var bombNum = Math.floor(all * 0.3)
+  for (var i = 0; i < bombNum; i++) {
+    let x = randomInt(n-1)
+    let y = randomInt(n-1)
+    /*
+    while(square[x][y] === 9) {
+      let x = randomInt(n-1)
+      let y = randomInt(n-1)
+      log(x, y)
+    }
+    */
+    square[x][y] = 9
+  }
+  log('bomber num', bombNum)
+  return square
 }
-*/
+
 //生成09方阵
 
 const plus1 = function(square, i, j) {
