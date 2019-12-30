@@ -78,21 +78,24 @@ const showBomb = function() {
       }
     }
   }
-
-  for (let i = 0; i < bombs.length; i++) {
-    setTimeout(function(){
-      bombs[i].classList.value = 'tableCell boom'
-      log('bombs[i] = ', bombs[i])
+  var k = 0
+  var t = setTimeout(function(){
+    log('setTimeout', k)
+    bombs[k].classList.value = 'tableCell boom'
+    //log('bombs[i] = ', bombs[i])
+    k++
+    if(k >= bombs.length){
+      clearTimeout(t)
+    } else {
+      arguments.callee()
+    }
     }, 1000)
-  }
 }
 
 //计时函数功能
-const timer = function(time, callback) {
-  var i = 0
-  var t = setInterval(callback(), time);
-  log('Timer END')
-}
+
+
+
 /*
 timer(1000, function(i) {
   log('interval', i)
@@ -106,6 +109,7 @@ timer(1000, function(i) {
 /*1.去除特定cover的函数
 2.去除后扩散功能
 */
+
 const tableCells = function() {
   var all = eAll('.tableCell')
   var len = all.length

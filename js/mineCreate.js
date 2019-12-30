@@ -1,7 +1,6 @@
 /*
 写输出N*N扫雷方阵函数
 */
-
 const square0 = function(n) {
   var square = []
   var row = []
@@ -24,19 +23,16 @@ const randomSquare09 = function(n) {
   for (var i = 0; i < bombNum; i++) {
     let x = randomInt(n-1)
     let y = randomInt(n-1)
-    /*
     while(square[x][y] === 9) {
-      let x = randomInt(n-1)
-      let y = randomInt(n-1)
+      x = randomInt(n-1)
+      y = randomInt(n-1)
       log(x, y)
     }
-    */
     square[x][y] = 9
   }
   log('bomber num', bombNum)
   return square
 }
-
 //生成09方阵
 
 const plus1 = function(square, i, j) {
