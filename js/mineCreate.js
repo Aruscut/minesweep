@@ -1,3 +1,6 @@
+//全局变量
+var num = {bomb : 24,
+           noBomb : 57}
 /*
 写输出N*N扫雷方阵函数
 */
@@ -20,6 +23,8 @@ const randomSquare09 = function(n) {
   log('ranSquare0', square)
   var all = n * n
   var bombNum = Math.floor(all * 0.3)
+  num.bomb = bombNum
+  num.noBomb = all - bombNum
   for (var i = 0; i < bombNum; i++) {
     let x = randomInt(n-1)
     let y = randomInt(n-1)

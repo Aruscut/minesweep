@@ -1,3 +1,32 @@
+//获胜条件判断
+const victory = function() {
+  log('YOU WIN!!')
+}
+
+const failure = function() {
+  log('YOU FAILED')
+}
+
+const showResult = function(s='') {
+  log('num.bomb', num.bomb, 'num.noBomb', num.noBomb)
+  var k = num.bomb === 0 || num.noBomb === 0
+  if(s === 'fail') {
+    failure()
+  }
+  if(k === true) {
+    victory()
+  }
+}
+
+var clickBomb = function() {
+  num.bomb--
+  showResult()
+}
+
+var clickNoBomb = function() {
+  num.noBomb--
+  showResult()
+}
 
 const bindLeftClick = function() {
   bindAll('.tableCell', 'click', function(event) {
@@ -5,11 +34,10 @@ const bindLeftClick = function() {
     var n = parseInt(target.dataset.value)
     var flag = target.classList.contains('flag')
     var boom = target.classList.contains('boom')
-    if(flag === false) {
+    var cover = target.classList.contains('cover')
+    if(flag === false && cover === true) {
       if(n === 9) {
-        if(boom === false) {
-          showBomb()
-        }//防止重复执行
+        showBomb()
         changeClass(target, 'cover', 'boom')
       } else {
         changeClass(target, 'cover')
@@ -19,11 +47,11 @@ const bindLeftClick = function() {
         if(n === 0) {
           spread(target)
         }
+        clickNoBomb()
       }
     }
   })
 }
-
 //右键标记功能
 /*1.右键添加/移除。flag类√
 2.禁用右键菜单✔
@@ -33,6 +61,7 @@ const bindLeftClick = function() {
 const bindRightClick = function() {
   bindAll('.tableCell', 'mousedown', function(event) {
     var target = event.target
+    var n = parseInt(target.dataset.value)
     var cover = target.classList.contains('cover')
     var flag = target.classList.contains('flag')
     target.oncontextmenu = function(event) {
@@ -40,8 +69,14 @@ const bindRightClick = function() {
     }//禁用右键菜单
     if(event.button == 2 && cover == true) {
       changeClass(target, 'cover', 'flag')
+      if(n === 9) {
+        clickBomb()
+      }
     } else if (event.button == 2 && flag == true) {
       changeClass(target, 'flag', 'cover')
+      if(n === 9) {
+        num.bomb++
+      }
     }
   })
 }
@@ -63,7 +98,7 @@ const showBomb = function() {
   timer(bombs)
 }
 
-//计时函数功能
+//计时动画功能
 const timer = function(bombs) {
   var k = 0
   var t = setInterval(function() {
@@ -72,6 +107,7 @@ const timer = function(bombs) {
     //log('bombs[i] = ', bombs[i])
     k++
     if(k >= bombs.length){
+      showResult('fail')
       clearInterval(t)
     }
   }, 50)
@@ -117,6 +153,7 @@ const open1 = function(square, i, j) {
     var cover = cell.classList.contains('cover')
     var flag = cell.classList.contains('flag')
     if(value === '9' || flag === true) {
+      clickBomb()
       return null
     }
     if(cover === true) {
@@ -125,8 +162,10 @@ const open1 = function(square, i, j) {
       if(value === '0') {
         //log('value', value, 'cover', cover)
         openAround(square, i, j)
+        clickNoBomb()
         return null
       }
+      clickNoBomb()
     }
   }
 }
@@ -188,9 +227,9 @@ const bindButtons = function() {
   bind('.restart', 'click', function(event) {
     let target = event.target
     let n = target.dataset.row
-    log('n', typeof n, n)
+    //log('n', typeof n, n)
     n = parseInt(n)
-    log('n', typeof n, n)
+    //log('n', typeof n, n)
     resetTable(n)
   })
 }
