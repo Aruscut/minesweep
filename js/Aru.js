@@ -163,3 +163,15 @@ const arrayCopy = function(array) {
 [k + x + （N + 1）] % (N + 1)
 k + x 为负时 (N + 1) 可变成 N 倍
 */
+
+const changeClass = function(target, class1, class2='') {
+  var bool = target.classList.contains(class1)
+  if(bool == true) {
+    if (class2 == '') {
+      target.classList.toggle(class1)
+    } else {
+      target.classList.toggle(class1)
+      target.classList.toggle(class2)
+    }
+  }
+}

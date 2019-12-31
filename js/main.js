@@ -1,42 +1,24 @@
 
-const changeClass = function(target, class1, class2='') {
-  var bool = target.classList.contains(class1)
-  if(bool == true) {
-    if (class2 == '') {
-      target.classList.toggle(class1)
-    } else {
-      target.classList.toggle(class1)
-      target.classList.toggle(class2)
-    }
-  }
-  /*
-  if(class2 == '' && bool == true) {
-    target.classList.toggle(class1)
-    //log('removedClass', target.classList, class1)
-  } else if (bool == true) {
-    target.classList.toggle(class1)
-    target.classList.toggle(class2)
-    //log('changeClass ', target.classList)
-  }
-  */
-}
-
 const bindLeftClick = function() {
   bindAll('.tableCell', 'click', function(event) {
     var target = event.target
     var n = parseInt(target.dataset.value)
     var flag = target.classList.contains('flag')
-    if(n === 9) {
-      changeClass(target, 'cover', 'boom')
-      showBomb()
-      //target.innerHTML = ' <img src="image/bomb.jpg" alt="bomb">'
-    } else {
-      changeClass(target, 'cover')
-      if(flag == false)
-      target.innerHTML = n
-      log('taget.classList', target.classList)
-      if(n === 0) {
-        spread(target)
+    var boom = target.classList.contains('boom')
+    if(flag === false) {
+      if(n === 9) {
+        if(boom === false) {
+          showBomb()
+        }//防止重复执行
+        changeClass(target, 'cover', 'boom')
+      } else {
+        changeClass(target, 'cover')
+        if(flag == false)
+        target.innerHTML = n
+        log('taget.classList', target.classList)
+        if(n === 0) {
+          spread(target)
+        }
       }
     }
   })
@@ -92,9 +74,8 @@ const timer = function(bombs) {
     if(k >= bombs.length){
       clearInterval(t)
     }
-  }, 100)
+  }, 50)
 }
-
 
 /*
 timer(1000, function(i) {
