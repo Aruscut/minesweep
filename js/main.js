@@ -78,22 +78,22 @@ const showBomb = function() {
       }
     }
   }
+  timer(bombs)
+}
+
+//计时函数功能
+const timer = function(bombs) {
   var k = 0
-  var t = setTimeout(function(){
+  var t = setInterval(function() {
     log('setTimeout', k)
     bombs[k].classList.value = 'tableCell boom'
     //log('bombs[i] = ', bombs[i])
     k++
     if(k >= bombs.length){
-      clearTimeout(t)
-    } else {
-      arguments.callee()
+      clearInterval(t)
     }
-    }, 1000)
+  }, 100)
 }
-
-//计时函数功能
-
 
 
 /*
