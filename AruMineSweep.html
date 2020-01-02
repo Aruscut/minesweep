@@ -12,7 +12,7 @@
       }
       .tableCell {
         display: table-cell;
-        border: solid red 1px;
+        border: solid white 3px;
         width: 50px;
         height: 50px;
         text-align: center;
@@ -33,17 +33,43 @@
       .flag {
         background: lightblue url('image/flag.png') no-repeat;
       }
+      .alert-content {
+        position: fixed;
+        top:0px;
+        left:0px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .alert-mask {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: black;
+        opacity: 0.5;
+      }
+
+      .alert-cell {
+        opacity: 0.1;
+        background: white;
+        position: relative;
+        display: block;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width : 160px;
+        text-align: center;
+      }
+      #alert1-message {
+        opacity: 1;
+        color: black;
+      }
+      .alert-cell:hover {
+        color: red
+      }
     </style>
   </head>
   <body>
-
-    <!--
-      <div class="tableRow">
-        <div class="tableCell cover">1</div>
-        <div class="tableCell"></div>
-        <div class="tableCell"></div>
-      </div>
-    -->
     <div class="tableContainer"></div>
     <div class="buttons">
       <button type="button" class="junior">初级</button>

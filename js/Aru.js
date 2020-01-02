@@ -18,7 +18,7 @@ var ajax = function(method, path, headers, data, response){
 
 var e = function(input){
   var target = document.querySelector(input)
-  log('querySelector', input, target)
+  //log('querySelector', input, target)
   return target
 }
 

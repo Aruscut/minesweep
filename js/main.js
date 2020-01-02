@@ -1,9 +1,57 @@
+var templateAlert = function(message) {
+  var alert = [{message : message}]
+  var t1 = `
+      <div class="alert-content">
+        <div class="alert-mask"></div>
+        <div class="alert-cell">
+          <div id="alert1-message">${alert[0].message}</div>
+          <div>
+            <button class='alert1-button'>OK</button>
+          </div>
+        </div>
+      </div>
+      `
+  return t1
+}
+
+var insertAlert = function(string) {
+  var target = e('body')
+  var alert = templateAlert(string)
+  appendHtml(target, alert)
+  log('inserted')
+}
+
+var alert = function(message) {
+  bindAlert1(deleteAlert)
+  insertAlert(message)
+}
+
+var deleteAlert = function() {
+  var t = event.target
+  log('bindDelete', t)
+  var alert1 = t.classList.contains("alert1-button")
+  if(alert1) {
+    log('alert1-button clicked')
+    resetTable(num.rows)
+    var p = e('.alert-content')
+    p.remove()
+    var b = e('body')
+    b.removeEventListener('click', deleteAlert)//回收f
+  }
+}
+
+var bindAlert1 = function(f) {
+  bind('body', 'click', f)
+}
+
 //获胜条件判断
 const victory = function() {
+  alert('YOU WIN!!!')
   log('YOU WIN!!')
 }
 
 const failure = function() {
+  alert('YOU LOSE!!!')
   log('YOU FAILED')
 }
 
@@ -27,7 +75,9 @@ var clickNoBomb = function() {
   num.noBomb--
   showResult()
 }
+//
 
+//左键标记功能
 const bindLeftClick = function() {
   bindAll('.tableCell', 'click', function(event) {
     var target = event.target
@@ -52,10 +102,11 @@ const bindLeftClick = function() {
     }
   })
 }
+
 //右键标记功能
 /*1.右键添加/移除。flag类√
 2.禁用右键菜单✔
-3.添加后禁用click
+3.添加后禁用click✔
 4。移除cover后不能标记。✔
 */
 const bindRightClick = function() {
@@ -80,6 +131,7 @@ const bindRightClick = function() {
     }
   })
 }
+//
 
 //掀开bomb模块
 const showBomb = function() {
@@ -97,6 +149,7 @@ const showBomb = function() {
   }
   timer(bombs)
 }
+//
 
 //计时动画功能
 const timer = function(bombs) {
@@ -112,20 +165,6 @@ const timer = function(bombs) {
     }
   }, 50)
 }
-
-/*
-timer(1000, function(i) {
-  log('interval', i)
-  i++
-  if(i > 5) {
-    clearInterval(t)
-    log('interval END')
-  }
-})
-//点零扩散功能
-/*1.去除特定cover的函数
-2.去除后扩散功能
-*/
 
 const tableCells = function() {
   var all = eAll('.tableCell')
@@ -145,6 +184,7 @@ const tableCells = function() {
 }
 //获取按行数个数排列的数组
 
+//点零扩散功能
 const open1 = function(square, i, j) {
   var len = square.length
   if(i >= 0 && i < len && j >= 0 && j < len) {
@@ -205,6 +245,7 @@ const testTable = function(n) {
   insertTemp(t)
 }
 
+//按键功能
 const setRestart = function(n) {
   let target = e('.restart')
   target.dataset.row = String(n)
@@ -233,12 +274,14 @@ const bindButtons = function() {
     resetTable(n)
   })
 }
+//
 
 const resetTable = function(n) {
-  log('resetTable', n)
+  log('resetTable', n)  
   creatTable(n)
   bindLeftClick()
   bindRightClick()
+  log('num', num)
 }
 
 const main = function() {
