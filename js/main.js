@@ -1,13 +1,17 @@
+//victory alert 模块
 var templateAlert = function(message) {
   var alert = [{message : message}]
+  if(message === 'YOU WIN!!!') {
+    var result = 'win'
+  } else {
+    var result = 'lose'
+  }
   var t1 = `
       <div class="alert-content">
         <div class="alert-mask"></div>
-        <div class="alert-cell">
+        <div class="alert-cell ${result} ">
           <div id="alert1-message">${alert[0].message}</div>
-          <div>
-            <button class='alert1-button'>OK</button>
-          </div>
+          <div class='alert1-button'>OK</div>
         </div>
       </div>
       `
@@ -40,8 +44,8 @@ var deleteAlert = function() {
   }
 }
 
-var bindAlert1 = function(f) {
-  bind('body', 'click', f)
+var bindAlert1 = function(deleteAlert) {
+  bind('body', 'click', deleteAlert)
 }
 
 //获胜条件判断
@@ -277,7 +281,7 @@ const bindButtons = function() {
 //
 
 const resetTable = function(n) {
-  log('resetTable', n)  
+  log('resetTable', n)
   creatTable(n)
   bindLeftClick()
   bindRightClick()

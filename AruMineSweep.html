@@ -4,12 +4,24 @@
     <meta charset="utf-8">
     <title>MineSweep</title>
     <style media="screen">
+      body {
+        text-align: center;
+      }
+
+      .head {
+        color: cornflowerblue;
+      }
+
       .tableContainer {
         display: table;
+        margin: auto;
       }
+
       .tableRow {
         display: table-row;
       }
+
+
       .tableCell {
         display: table-cell;
         border: solid white 3px;
@@ -18,21 +30,27 @@
         text-align: center;
         font-size: 36px;
       }
+
       .hide {
         display: none;
       }
+
       .cover {
         background: lightblue;
       }
+
       .cover:hover{
         background: yellow;
       }
+
       .boom {
         background: url('image/bomb.jpg') no-repeat;
       }
+
       .flag {
         background: lightblue url('image/flag.png') no-repeat;
       }
+
       .alert-content {
         position: fixed;
         top:0px;
@@ -50,26 +68,54 @@
       }
 
       .alert-cell {
-        opacity: 0.1;
-        background: white;
         position: relative;
         display: block;
         top: 50%;
         left: 50%;
         transform: translateY(-50%) translateX(-50%);
-        width : 160px;
         text-align: center;
+        font-size: -webkit-xxx-large;
       }
-      #alert1-message {
-        opacity: 1;
-        color: black;
+
+      .win {
+        color: orange;
       }
-      .alert-cell:hover {
-        color: red
+
+      .lose {
+        color: aquamarine;
+      }
+
+      .alert1-button {
+        width: 100px;
+        margin:auto;
+      }
+
+      .alert1-button:hover {
+        color: lightyellow;
+      }
+
+      .buttons {
+        margin-top: 20px;
+      }
+
+      button {
+        color: cornflowerblue;
+        background: lightblue;
+        width: 60px;
+        height: 25px;
+        font-size: 17px;
+        border-width: 0px;
+        font-weight: 600;
+      }
+      button:hover {
+        background: aquamarine
       }
     </style>
   </head>
   <body>
+    <div class="head">
+      <h1>ARU'S MINESWEEP!!!</h1>
+    </div>
     <div class="tableContainer"></div>
     <div class="buttons">
       <button type="button" class="junior">初级</button>
