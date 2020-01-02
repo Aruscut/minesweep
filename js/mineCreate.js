@@ -4,6 +4,36 @@ var num = {
   noBomb : 57,
   rows : 9,
 }
+
+var endTime = 0
+
+var time = 0
+
+var clock = 0
+
+var clock10 = 0
+
+var clockOn = function() {
+  clock10 = 1
+  var target = e('#clock')
+  clock = setInterval(function() {
+    time++
+    target.innerHTML = `TIME : ${time}S`
+    log('time', time)
+  }, 1000)
+}
+
+const clockOff = function() {
+  log('clockOff')
+  clock10 = 0
+  var target = e('#clock')
+  clearInterval(clock)
+  endTime = time
+  time = 0
+  target.innerHTML = `TIME : ${time}S`
+  //弹窗时冻结时间
+}
+
 /*
 写输出N*N扫雷方阵函数
 */
@@ -25,7 +55,7 @@ const randomSquare09 = function(n) {
   var square = square0(n)
   log('ranSquare0', square)
   var all = n * n
-  var bombNum = Math.floor(all * 0.3)
+  var bombNum = Math.floor(all * 0.2)
   num.bomb = bombNum
   num.noBomb = all - bombNum
   num.rows = n

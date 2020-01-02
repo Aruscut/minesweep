@@ -23,6 +23,9 @@ var insertAlert = function(string) {
   var alert = templateAlert(string)
   appendHtml(target, alert)
   log('inserted')
+  clockOff()
+  var target = e('#clock')
+  target.innerHTML = `TIME : ${endTime}S`
 }
 
 var alert = function(message) {
@@ -60,7 +63,6 @@ const failure = function() {
 }
 
 const showResult = function(s='') {
-  log('num.bomb', num.bomb, 'num.noBomb', num.noBomb)
   var k = num.bomb === 0 || num.noBomb === 0
   if(s === 'fail') {
     failure()
@@ -68,6 +70,7 @@ const showResult = function(s='') {
   if(k === true) {
     victory()
   }
+  log('num.bomb', num.bomb, 'num.noBomb', num.noBomb)
 }
 
 var clickBomb = function() {
@@ -89,6 +92,9 @@ const bindLeftClick = function() {
     var flag = target.classList.contains('flag')
     var boom = target.classList.contains('boom')
     var cover = target.classList.contains('cover')
+    if(clock10 === 0) {
+      clockOn()
+    }//计时模块
     if(flag === false && cover === true) {
       if(n === 9) {
         showBomb()
@@ -122,15 +128,23 @@ const bindRightClick = function() {
     target.oncontextmenu = function(event) {
       return false
     }//禁用右键菜单
-    if(event.button == 2 && cover == true) {
-      changeClass(target, 'cover', 'flag')
-      if(n === 9) {
-        clickBomb()
-      }
-    } else if (event.button == 2 && flag == true) {
-      changeClass(target, 'flag', 'cover')
-      if(n === 9) {
-        num.bomb++
+    if(event.button === 2) {
+      if(cover === true) {
+        if(clock10 === 0) {
+          clockOn()
+        }//计时模块
+        changeClass(target, 'cover', 'flag')
+        if(n === 9) {
+          clickBomb()
+        }
+      } else if (flag === true) {
+        if(clock10 === 0) {
+          clockOn()
+        }//计时模块
+        changeClass(target, 'flag', 'cover')
+        if(n === 9) {
+          num.bomb++
+        }
       }
     }
   })
@@ -158,16 +172,16 @@ const showBomb = function() {
 //计时动画功能
 const timer = function(bombs) {
   var k = 0
+  showResult('fail')
   var t = setInterval(function() {
     log('setTimeout', k)
     bombs[k].classList.value = 'tableCell boom'
     //log('bombs[i] = ', bombs[i])
     k++
     if(k >= bombs.length){
-      showResult('fail')
       clearInterval(t)
     }
-  }, 50)
+  }, 500)
 }
 
 const tableCells = function() {
@@ -286,6 +300,7 @@ const resetTable = function(n) {
   bindLeftClick()
   bindRightClick()
   log('num', num)
+  clockOff()
 }
 
 const main = function() {

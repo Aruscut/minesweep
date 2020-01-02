@@ -8,8 +8,15 @@
         text-align: center;
       }
 
-      .head {
+      .head h1{
         color: cornflowerblue;
+        margin-bottom: 0px;
+      }
+
+      #clock {
+        color: cornflowerblue;
+        font-weight: 400;
+        font-size: x-large;
       }
 
       .tableContainer {
@@ -20,7 +27,6 @@
       .tableRow {
         display: table-row;
       }
-
 
       .tableCell {
         display: table-cell;
@@ -74,7 +80,7 @@
         left: 50%;
         transform: translateY(-50%) translateX(-50%);
         text-align: center;
-        font-size: -webkit-xxx-large;
+        font-size: 50px;
       }
 
       .win {
@@ -95,7 +101,7 @@
       }
 
       .buttons {
-        margin-top: 20px;
+        margin-top: 10px;
       }
 
       button {
@@ -107,6 +113,7 @@
         border-width: 0px;
         font-weight: 600;
       }
+
       button:hover {
         background: aquamarine
       }
@@ -115,6 +122,9 @@
   <body>
     <div class="head">
       <h1>ARU'S MINESWEEP!!!</h1>
+    </div>
+    <div id="clock">
+      TIME : 0S
     </div>
     <div class="tableContainer"></div>
     <div class="buttons">
