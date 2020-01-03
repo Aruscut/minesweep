@@ -3,6 +3,7 @@ var num = {
   bomb : 24,
   noBomb : 57,
   rows : 9,
+  flagLeft : 24,
 }
 
 var endTime = 0
@@ -13,26 +14,27 @@ var clock = 0
 
 var clock10 = 0
 
+//时钟模块
 var clockOn = function() {
   clock10 = 1
   var target = e('#clock')
   clock = setInterval(function() {
     time++
     target.innerHTML = `TIME : ${time}S`
-    log('time', time)
+    //log('time', time)
   }, 1000)
 }
 
 const clockOff = function() {
-  log('clockOff')
+  log('clockOff', endTime, time)
   clock10 = 0
   var target = e('#clock')
   clearInterval(clock)
-  endTime = time
   time = 0
   target.innerHTML = `TIME : ${time}S`
   //弹窗时冻结时间
 }
+//
 
 /*
 写输出N*N扫雷方阵函数
@@ -53,23 +55,24 @@ const square0 = function(n) {
 
 const randomSquare09 = function(n) {
   var square = square0(n)
-  log('ranSquare0', square)
+  //log('ranSquare0', square)
   var all = n * n
   var bombNum = Math.floor(all * 0.2)
   num.bomb = bombNum
   num.noBomb = all - bombNum
   num.rows = n
+  num.flagLeft = bombNum
   for (var i = 0; i < bombNum; i++) {
     let x = randomInt(n-1)
     let y = randomInt(n-1)
     while(square[x][y] === 9) {
       x = randomInt(n-1)
       y = randomInt(n-1)
-      log(x, y)
+      //log(x, y)
     }
     square[x][y] = 9
   }
-  log('bomber num', bombNum)
+  //log('bomber num', bombNum)
   return square
 }
 //生成09方阵
