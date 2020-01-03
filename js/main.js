@@ -22,7 +22,8 @@ var insertAlert = function(string) {
   var target = e('body')
   var alert = templateAlert(string)
   appendHtml(target, alert)
-  log('inserted')
+  //log('inserted')
+  endTime = time//记录停止时间
   clockOff()
   var target = e('#clock')
   target.innerHTML = `TIME : ${endTime}S`
@@ -35,10 +36,10 @@ var alert = function(message) {
 
 var deleteAlert = function() {
   var t = event.target
-  log('bindDelete', t)
+  //log('bindDelete', t)
   var alert1 = t.classList.contains("alert1-button")
   if(alert1) {
-    log('alert1-button clicked')
+    //log('alert1-button clicked')
     resetTable(num.rows)
     var p = e('.alert-content')
     p.remove()
@@ -63,14 +64,14 @@ const failure = function() {
 }
 
 const showResult = function(s='') {
-  var k = num.bomb === 0 || num.noBomb === 0
+  var k = (num.bomb === 0 && num.flagLeft === 0) || num.noBomb === 0
   if(s === 'fail') {
     failure()
   }
   if(k === true) {
     victory()
   }
-  log('num.bomb', num.bomb, 'num.noBomb', num.noBomb)
+  //log('num', num)
 }
 
 var clickBomb = function() {
@@ -103,7 +104,7 @@ const bindLeftClick = function() {
         changeClass(target, 'cover')
         if(flag == false)
         target.innerHTML = n
-        log('taget.classList', target.classList)
+        //log('taget.classList', target.classList)
         if(n === 0) {
           spread(target)
         }
@@ -130,6 +131,7 @@ const bindRightClick = function() {
     }//禁用右键菜单
     if(event.button === 2) {
       if(cover === true) {
+        num.flagLeft--// flag计算
         if(clock10 === 0) {
           clockOn()
         }//计时模块
@@ -138,6 +140,7 @@ const bindRightClick = function() {
           clickBomb()
         }
       } else if (flag === true) {
+        num.flagLeft++
         if(clock10 === 0) {
           clockOn()
         }//计时模块
@@ -174,14 +177,14 @@ const timer = function(bombs) {
   var k = 0
   showResult('fail')
   var t = setInterval(function() {
-    log('setTimeout', k)
+    //log('setTimeout', k)
     bombs[k].classList.value = 'tableCell boom'
     //log('bombs[i] = ', bombs[i])
     k++
     if(k >= bombs.length){
       clearInterval(t)
     }
-  }, 500)
+  }, 80)
 }
 
 const tableCells = function() {
@@ -229,7 +232,7 @@ const open1 = function(square, i, j) {
 }
 
 const openAround = function(square, x, y) {
-  log('openAround', x, y)
+  //log('openAround', x, y)
   open1(square, x-1, y)
   open1(square, x-1, y+1)
   open1(square, x-1, y-1)
@@ -243,7 +246,7 @@ const openAround = function(square, x, y) {
 const spread = function(target) {
   var i = parseInt(target.dataset.i)
   var j = parseInt(target.dataset.j)
-  log('type of i, j ', typeof i, typeof j)
+  //log('type of i, j ', typeof i, typeof j)
   var cells = tableCells()
   openAround(cells, i, j)
 }
@@ -253,7 +256,7 @@ const spread = function(target) {
 //test
 const testMine = function(n) {
   var square = randomSquare09(n)
-  log('creatMine', square)
+  //log('creatMine', square)
   return square
 }
 
@@ -295,11 +298,11 @@ const bindButtons = function() {
 //
 
 const resetTable = function(n) {
-  log('resetTable', n)
+  //log('resetTable', n)
   creatTable(n)
   bindLeftClick()
   bindRightClick()
-  log('num', num)
+  //log('num', num)
   clockOff()
 }
 
