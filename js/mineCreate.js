@@ -15,7 +15,7 @@ var clock = 0
 var clock10 = 0
 
 //时钟模块
-var clockOn = function() {
+const clockOn = function() {
   clock10 = 1
   var target = e('#clock')
   clock = setInterval(function() {
